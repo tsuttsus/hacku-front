@@ -26,7 +26,7 @@ submit.addEventListener("click",function(){
     //生成
     var xmlhttp=new XMLHttpRequest();
     //準備
-    xmlhttp.onreadystatechange = function () {
+    xmlhttp.onreadystatechange = () =>  {
         // 成功した場合
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
           var response=xmlhttp.responseText;
@@ -43,6 +43,6 @@ submit.addEventListener("click",function(){
 /**
  * 3.resを表示
  */
-function showReponse(responseText){
+const showReponse = function(responseText){
   console.log(responseText)
 }
