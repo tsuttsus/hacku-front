@@ -21,6 +21,15 @@ input.addEventListener("change",function(){
 const submit=document.getElementById("submit");
 //クリックされたら...
 submit.addEventListener("click",function(){
+    //ページの切り替え
+    document.getElementById("frame").innerHTML=
+    `
+    <div class="loader-container">
+      <div class="loader"></div>
+      <p class="loader-text">分割中...</p>
+    </div>
+    `
+    //ここまで
     var formdata = new FormData();
     formdata.append("file",file);
     //生成
@@ -46,3 +55,4 @@ submit.addEventListener("click",function(){
 const showReponse = function(responseText){
   console.log(responseText)
 }
+
