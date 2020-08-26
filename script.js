@@ -21,7 +21,6 @@ input.addEventListener("change",function(){
 const submit=document.getElementById("submit");
 //クリックされたら...
 submit.addEventListener("click",function(){
-    console.log('ボタン');
     var formdata = new FormData();
     formdata.append("file",file);
     //生成
@@ -30,15 +29,14 @@ submit.addEventListener("click",function(){
     xmlhttp.onreadystatechange = function () {
         // 成功した場合
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-          // alert(xmlhttp.responseText);
           var response=xmlhttp.responseText;
-          showResponse(response)
+          console.log(response)
         }
       };
     // APIを開いて
-    xmlhttp.open("POST", "", true);
+    xmlhttp.open("POST", "http://54.64.51.76:5000/api", true);
     // 叩く。
-    xmlhttp.send(file);
+    xmlhttp.send(formdata);
 
 })
 
