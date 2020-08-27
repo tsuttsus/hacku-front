@@ -21,25 +21,19 @@ input.addEventListener("change",function(){
 const submit=document.getElementById("submit");
 //クリックされたら...
 submit.addEventListener("click",function(){
-    //ページの切り替え
-    document.getElementById("frame").innerHTML=
-    `
-    <div class="loader-container">
-      <div class="loader"></div>
-      <p class="loader-text">分割中...</p>
-    </div>
-    `
+    
     //ここまで
     var formdata = new FormData();
     formdata.append("file",file);
     //生成
     var xmlhttp=new XMLHttpRequest();
     //準備
-    xmlhttp.onreadystatechange = () =>  {
+    xmlhttp.onreadystatechange = function() {
         // 成功した場合
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-          var response=xmlhttp.responseText;
-          console.log(response)
+          response=JSON.parse(xmlhttp.responseText).img
+          step1()
+          step2()
         }
       };
     // APIを開いて
@@ -49,10 +43,87 @@ submit.addEventListener("click",function(){
 
 })
 
+
+
+/* ------------------------------------
+画面遷移系の処理
+------------------------------------ */
+
 /**
- * 3.resを表示
+ * 
  */
-const showReponse = function(responseText){
-  console.log(responseText)
+function step1() {
+  document.getElementById("frame").innerHTML=
+    `
+    <div class="loader-container">
+      <div class="loader"></div>
+      <p class="loader-text">分割中...</p>
+    </div>
+    `
+  //color => noncolor
+  const step1Element = document.getElementById("step1");
+  step1Element.classList.remove("color")
+  step1Element.classList.add("noncolor")
+
+  const step2Element = document.getElementById("step2");
+  step2Element.classList.remove("noncolor")
+  step2Element.classList.add("color")
+  
 }
 
+/**
+ * 
+ */
+function step2(){
+
+  btnStr = ``
+  console.log(response)
+  const len=response.length;
+  
+ 
+  for(let i=1;i<=len; i++){
+    btnStr += `<button id="img-btn-${i}">${i}</button>`
+  }
+
+
+  document.getElementById("frame").innerHTML = 
+  `
+  <div>
+    <img id="result"/>    
+  </div>
+  <div>
+     ${btnStr}
+  </div>
+  `
+
+  for(let i=1;i<=len;i++){
+    const show=document.getElementById(`img-btn-${i}`);
+    show.addEventListener("click",function(){
+      document.getElementById("result").src="data:image/png;base64," + response[i-1];
+    })
+  }
+
+  document.getElementById("result").src="data:image/png;base64," + response[0];
+
+  const step2Element = document.getElementById("step2");
+  step2Element.classList.remove("color")
+  step2Element.classList.add("noncolor")
+
+  const step3Element = document.getElementById("step3");
+  step3Element.classList.remove("noncolor")
+  step3Element.classList.add("color")
+}
+
+/**
+ * 
+ */
+function step3(){
+  const step3Element = document.getElementById("step3");
+  step3Element.classList.remove("color")
+  step3Element.classList.add("noncolor")
+
+  const step1Element = document.getElementById("step1");
+  step1Element.classList.remove("noncolor")
+  step1Element.classList.add("color")
+
+}
