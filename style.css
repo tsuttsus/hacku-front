@@ -1,177 +1,293 @@
 /* ------------------------------------
 reset
 ------------------------------------ */
-body{
+
+body {
   position: absolute;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   height: 100vh;
-  width:100%;
-  min-height:800px
+  width: 100%;
+  min-height: 800px
 }
 
-*,*::before,*::after{
-  padding:0;
-  margin:0;
+*, *::before, *::after {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
+}
+
+button:focus{
+  outline:none;
 }
 
 /* ------------------------------------
 common
 ------------------------------------ */
-.hide{
+main{
+  max-width:800px;
+  width:100%;
+  min-width:480px;
+  height:100%;
+  margin:0 auto;
+}
+
+.example {
+  display: flex;
+  height:30%;
+  justify-content: space-evenly;
+  padding:1em 0;
+}
+
+
+.hide {
   display: none;
 }
 
-.h-full{
-  height:100%;
+.block {
+  display: block;
 }
 
-.p-1{
+.h-full {
+  height: 100%;
+}
+
+.p-1 {
+  padding: 0.3em;
+}
+
+.p-2 {
+  padding: 0.6em;
+}
+
+.p-3 {
+  padding: 0.9em;
+}
+
+.pt-1{
   padding:0.3em;
 }
 
-.p-2{
-  padding:0.6em;
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.p-3{
-  padding:0.9em;
+.mb-1 {
+  margin-bottom: 0.3em;
 }
 
-.mx-auto{
-  margin-left:auto;
-  margin-right:auto;
+.mb-2 {
+  margin-bottom: 0.6em;
 }
 
-.mb-1{
-  margin-bottom:0.3em;
+.mb-3 {
+  margin-bottom: 0.9em;
 }
 
-.mb-2{
-  margin-bottom:0.6em;
-}
-
-.mb-3{
-  margin-bottom:0.9em;
-}
-
-.common-btn{
+.common-btn {
   display: block;
-  padding:1em 2em;
-  font-size:1.2em;
-  color:#fff;
-  background-color:#009BC6;
+  padding: 1em 2em;
+  font-size: 1.2em;
+  color: #fff;
+  background-color: #009BC6;
   box-shadow: 2px 2px 2px #2e2e2e;
-  border:2px solid #009BC6;
+  border: 2px solid #009BC6;
   border-radius: 0.3em;
   transition-duration: .3s;
 }
 
-.common-btn:hover{
-  color:#009BC6;
-  background-color:#fff;
+.common-btn:hover {
+  opacity:0.8;
 }
 
+.common-btn:disabled,.common-btn:hover:disabled{
+  color:#2e2e2e;
+  background-color:#bbb;
+  border-color:#2e2e2e;
+  opacity:0.2;
+}
+
+.red-font{
+  color:red;
+}
+
+/* ------------------------------------
+状態を表す円
+------------------------------------ */
+
+.circle {
+  position: relative;
+  display: flex;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle.color {
+  background: #97cbf3;
+  color: #fff;
+  font-weight: bolder;
+}
+
+.circle.color::before {
+  position: absolute;
+  z-index:-1;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #009bc6;
+  color: #fff;
+  animation: 1s linear 0s infinite circleripple;
+}
+
+@keyframes circleripple {
+  0% {
+    opacity: 1;
+    transform: scale(1.0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+.circle.noncolor {
+  background: #BBB;
+}
 
 /* ------------------------------------
 アップロード部分
 ------------------------------------ */
-.upload-container{
+
+.upload-container {
   display: grid;
-  grid-template-columns: 50% 50%;
-  height:30%;
+  grid-template-rows: 1.5em 100%;
+  min-height:400px;
 }
 
-
 /*ドラッグ＆ドロップ*/
-.d8d-container{
+
+.d8d-container {
   display: flex;
-  width:100%;
-  height:100%;
-  color:#adadad;
-  background-color:#F5F5F5;
-  border:2px dashed #2e2e2e;
+  width: 100%;
+  height: 100%;
+  color: #adadad;
+  background-color: #F5F5F5;
+  border: 2px dashed #2e2e2e;
   border-radius: 10px;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
 
-.preview-container{
+.preview-container {
   display: grid;
-  width:100%;
+  width: 100%;
   grid-template-rows: 1fr 2em;
   text-align: center;
 }
 
-.preview-img-frame{
+.preview-img-frame {
   position: relative;
-  width:100%;
-  height:100%;
-  border:1px solid #2e2e2e;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #2e2e2e;
 }
 
-.preview-img-frame-default-text{
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:100%;
-  transform:translate(-50%,-50%);
-
+.preview-img-frame-default-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
 }
 
-.preview-img{
+.preview-img {
   display: block;
-  height:100%;
-  margin:0 auto;
+  height: 100%;
+  margin: 0 auto;
 }
+
 
 /* ------------------------------------
-ここまで
+分割後の楽譜
 ------------------------------------ */
 
-
-/*ここ以降、堤が追加*/
-   
-.example{
-    display:flex;
-    justify-content: space-evenly;
-}
-.circle{
-  display:flex;
-  width:120px;
-  height:120px;
-  border-radius: 50%;
-  text-align:center;
-  align-items: center;
-  justify-content: center;
-
+.img-change-frame {
+  position:relative;
+  text-align: center;
+  overflow:auto;
+  height:500px;
 }
 
-.circle.color{
-  background:#97cbf3;
+.img-change-container{
+  width:100%;
+  height:100%;
+  overflow:auto;
 }
 
-.circle.noncolor{
-  background:#BBB;
+.img-change{
+  border: 1px solid #BBB;
+  padding: 0.2em;
+  width:100%;
+}
+
+.img-change.emphasize{
+  width:200%;
+}
+
+.empasize_btn{
+  position:absolute;
+  right:0;
+  top:0;
+  padding:0.5em;
+  border-radius:0.2em;
+  box-shadow:2px 2px 2px #bbb;
+}
+
+.img-change-btn-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.img-change-btn {
+  width: 8%;
+  margin: 1%;
+  padding: 0.2em 0;
+  border: 1px solid #BBB;
+  border-radius: 0.2em;
+  font-size: 1.5em;
+  transition-duration: .3s;
+}
+
+.img-change-btn:hover ,.img-change-btn.active{
+  color: #fff;
+  background-color: #009BC6;
 }
 
 /* ------------------------------------
 ローディングアニメーション
 ------------------------------------ */
-.loader-container{
+
+.loader-container {
   position: relative;
-  transform:scale(1.5);
+  transform: scale(1.5);
 }
 
-.loader-text{
+.loader-text {
   position: absolute;
   color: #009bc6;
-  font-weight:bolder;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
+  font-weight: bolder;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .loader {
@@ -190,16 +306,15 @@ common
   -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
   animation: load6 1.7s infinite ease, round 1.7s infinite ease;
 }
+
 @-webkit-keyframes load6 {
   0% {
     box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
-  5%,
-  95% {
+  5%, 95% {
     box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
-  10%,
-  59% {
+  10%, 59% {
     box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
   }
   20% {
@@ -212,16 +327,15 @@ common
     box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
 }
+
 @keyframes load6 {
   0% {
     box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
-  5%,
-  95% {
+  5%, 95% {
     box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
-  10%,
-  59% {
+  10%, 59% {
     box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
   }
   20% {
@@ -234,6 +348,7 @@ common
     box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
 }
+
 @-webkit-keyframes round {
   0% {
     -webkit-transform: rotate(0deg);
@@ -244,6 +359,7 @@ common
     transform: rotate(360deg);
   }
 }
+
 @keyframes round {
   0% {
     -webkit-transform: rotate(0deg);
@@ -254,5 +370,3 @@ common
     transform: rotate(360deg);
   }
 }
-
-
