@@ -1,41 +1,55 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hacku</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-
-    <div class="example">
-        <div id="step1"class="circle color" >STEP1</div>
-        <div id="step2" class="circle noncolor" >STEP2</div>
-        <div id="step3" class="circle noncolor" >STEP3</div>
-    </div>
-    
-    <div id="frame" class="h-full">
-    <form class="upload-container mb-3">
-        <!-- ドラッグ＆ドロップ -->
-        <div class="h-full p-3">
-          <input id="choice" type="file" class="hide" />
-          <label for="choice" class="d8d-container">
-            <span>ドラッグ＆ドロップでファイルを追加</span>
-          </label>
+  </head>
+  <body>
+    <main>
+      <div class="example">
+        <div id="step1" class="circle color">
+          <p>
+            <span class="block">STEP1</span>
+            <span class="block">元の楽譜を選択</span>
+          </p>
         </div>
-        <!-- プレビュー -->
-        <div class="preview-container h-full p-3">
-          <div class="preview-img-frame">
-            <p class="preview-img-frame-default-text">ここにプレビューが表示されます</p>
-          <img src="" class="preview-img" id="origin_img"/>
-          </div>
-          <p id="origin_name"></p>
+        <div id="step2" class="circle noncolor">
+          <p>
+            <span class="block">STEP2</span>
+            <span class="block">作成中...</span>
+          </p>
         </div>
-      </form>
-      <div>
-    <button id="submit" class="common-btn mx-auto">楽譜を分割する</button>
+        <div id="step3" class="circle noncolor">
+          <p>
+            <span class="block">STEP3</span>
+            <span class="block">分割完了！</span>
+          </p>
+        </div>
       </div>
-    </div>
+
+      <div id="frame" class="frame">
+        <form class="upload-container mb-3">
+          <!-- ドラッグ＆ドロップ -->
+          <p id="attention">.pdf形式の楽譜ファイルを選択してください。</p>
+          <div class="h-full p-3">
+            <input id="choice" type="file" class="hide" accept="application/pdf"/>
+            <label for="choice" class="d8d-container">
+              <P>
+              <span class="block">ドラッグ＆ドロップでファイルを追加</span>
+              <span class="block pt-1">分割するファイル名:</span>
+              <span id="file_name" class="block"></span>
+              </P>
+            </label>
+          </div>
+        </form>
+        <div>
+          <button id="submit" class="common-btn mx-auto" disabled>楽譜を分割する</button>
+        </div>
+      </div>
+    </main>
     <script src="script.js"></script>
-</body>
+
+  </body>
 </html>
